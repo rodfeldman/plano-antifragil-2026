@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plano Anti-Frágil 2026 | Academia Lendár[IA]</title>
+  <meta name="description" content="Planejamento estratégico TDAH-Friendly para 2026. Framework de identidade, marcos trimestrais e sistema de recalibração.">
+  <meta property="og:title" content="Plano Anti-Frágil 2026">
+  <meta property="og:description" content="Planejamento estratégico TDAH-Friendly para construir sua melhor versão em 2026.">
+  <meta property="og:type" content="website">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script type="text/babel">
+    const { useState, useCallback, useMemo } = React;
+
+    // Logo SVG Component
+    const LogoDiamante = ({ size = 32, color = "#000" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" viewBox="0 0 320 320">
+        <path fill={color} d="M247.258 18.749A63.908 63.908 0 0 0 202.029 0h-84.091a63.906 63.906 0 0 0-45.229 18.749L18.748 72.596C6.749 84.596 0 100.961 0 117.944v84.095c0 16.866 6.75 33.232 18.748 45.231l53.978 53.981A63.907 63.907 0 0 0 117.954 320h84.092a63.908 63.908 0 0 0 45.228-18.749l53.978-53.981A63.91 63.91 0 0 0 320 202.039v-84.095a63.913 63.913 0 0 0-18.748-45.231l-53.978-53.98-.016.016Zm3.749 45.964c2 0 3.117.25 3.866.367.867 3.366 1 16-10.865 39.865-5.5 11.116-12.749 22.732-21.248 34.481a410.027 410.027 0 0 0-20.364-21.865c-7.25-7.25-14.499-14-21.865-20.366 7.616-5.5 15.249-10.5 22.731-14.866 27.231-15.866 42.479-17.499 47.729-17.499v-.117h.016Zm-44.362 95.212c-6.999 8.25-14.498 16.366-22.364 24.365-7.999 8-16.115 15.5-24.364 22.366-8.249-7-16.365-14.366-24.364-22.366-8-7.999-15.499-16.115-22.365-24.365 6.999-8.25 14.499-16.366 22.365-24.365 7.865-8 16.115-15.5 24.364-22.366 8.249 7 16.365 14.366 24.364 22.366 7.999 7.999 15.498 16.115 22.364 24.365ZM90.707 36.865c7.25-7.25 16.865-11.25 27.114-11.25h84.091c10.249 0 19.865 4 27.114 11.25l4.616 4.616c-20.997 5.117-46.978 18.866-73.842 39.115-26.864-20.25-52.844-33.865-73.842-39.115l4.616-4.616h.133ZM65.093 65.097c.617-.117 1.867-.367 3.867-.367 15.865 0 38.612 12.25 47.728 17.5 7.499 4.365 15.115 9.365 22.731 14.865-7.366 6.366-14.615 13.116-21.865 20.366a410.071 410.071 0 0 0-20.364 21.865c-8.5-11.749-15.748-23.365-21.248-34.481C64.077 80.979 64.193 68.363 65.077 64.98v.117h.016Zm-28.23 164.058c-7.25-7.25-11.249-16.866-11.249-27.116v-84.095c0-10.25 4-19.866 11.249-27.115l4.616-4.617c5.116 20.999 18.865 46.981 38.98 73.846-20.249 26.866-33.864 52.848-38.98 73.847l-4.616-4.617v-.133Zm31.98 25.982c-2 0-3.117-.25-3.866-.367-.867-3.366-1-15.999 10.865-39.865 5.5-11.116 12.749-22.732 21.248-34.481a410.071 410.071 0 0 0 20.364 21.865c7.25 7.25 14.499 14 21.865 20.366-7.616 5.5-15.249 10.5-22.731 14.866-27.23 15.866-42.48 17.499-47.728 17.499v.117h-.017Zm160.3 27.865c-7.249 7.25-16.865 11.249-27.114 11.249h-84.091c-10.249 0-19.865-3.999-27.114-11.249l-4.616-4.617c20.997-5.116 46.978-18.865 73.842-39.114 26.864 20.249 52.845 33.865 73.842 39.114l-4.616 4.617h-.133Zm25.614-28.232c-.617.117-1.867.367-3.866.367-15.865 0-38.613-12.25-47.729-17.499-7.499-4.367-15.115-9.367-22.731-14.866a410.464 410.464 0 0 0 21.865-20.366 410.027 410.027 0 0 0 20.364-21.865c8.499 11.749 15.748 23.365 21.248 34.481 11.865 23.866 11.749 36.482 10.865 39.865v-.117h-.016Zm39.479-52.864c0 10.25-4 19.866-11.249 27.115l-4.616 4.617c-5.116-20.999-18.865-46.981-38.979-73.846 20.248-26.866 33.863-52.848 38.979-73.847l4.616 4.617c7.249 7.25 11.249 16.866 11.249 27.115v84.229Z"/>
+      </svg>
+    );
+
+    // Progress Ring
+    const ProgressRing = ({ progress, size = 120, strokeWidth = 8 }) => {
+      const radius = (size - strokeWidth) / 2;
+      const circumference = radius * 2 * Math.PI;
+      const offset = circumference - (progress / 100) * circumference;
+
+      return (
+        <div className="relative" style={{ width: size, height: size }}>
+          <svg width={size} height={size} className="transform -rotate-90">
+            <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#E8E8E8" strokeWidth={strokeWidth} />
+            <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#000" strokeWidth={strokeWidth}
+              strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round"
+              style={{ transition: 'stroke-dashoffset 0.7s ease-out' }} />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-xl font-bold">{Math.round(progress)}%</span>
+          </div>
+        </div>
+      );
+    };
+
+    // Copyable Prompt
+    const CopyablePrompt = ({ prompt, label }) => {
+      const [copied, setCopied] = useState(false);
+      
+      const handleCopy = async () => {
+        try {
+          await navigator.clipboard.writeText(prompt);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+          const textarea = document.createElement('textarea');
+          textarea.value = prompt;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }
+      };
+
+      return (
+        <div className="bg-gray-100 rounded-xl p-4 mt-6">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-sm text-gray-600">{label}</p>
+            <button onClick={handleCopy}
+              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${copied ? 'bg-black text-white' : 'bg-white text-gray-700 hover:bg-gray-200'}`}>
+              {copied ? '✓ Copiado!' : '📋 Copiar'}
+            </button>
+          </div>
+          <div className="text-sm text-gray-700 bg-white p-3 rounded-lg whitespace-pre-wrap font-mono max-h-48 overflow-y-auto">
+            {prompt}
+          </div>
+        </div>
+      );
+    };
+
+    // Staircase Progress
+    const StaircaseProgress = ({ marcos }) => {
+      const quarters = ['Q1', 'Q2', 'Q3', 'Q4'];
+      const heights = [25, 50, 75, 100];
+      
+      return (
+        <div className="flex items-end justify-center gap-2 h-32 mb-6">
+          {quarters.map((q, i) => {
+            const marco = marcos[i];
+            const isFilled = marco.identidade.length > 5;
+            const isComplete = marco.completo;
+            
+            return (
+              <div key={q} className="flex flex-col items-center gap-1">
+                <div 
+                  className={`w-14 rounded-t-lg transition-all duration-500 flex items-end justify-center pb-2 ${
+                    isComplete ? 'bg-black' : isFilled ? 'bg-gray-400' : 'bg-gray-200'
+                  }`}
+                  style={{ height: `${heights[i]}%` }}>
+                  <span className={`text-xs font-bold ${isComplete || isFilled ? 'text-white' : 'text-gray-500'}`}>
+                    {isComplete ? '✓' : isFilled ? '◐' : '○'}
+                  </span>
+                </div>
+                <span className={`text-xs font-medium ${isComplete ? 'text-black' : 'text-gray-400'}`}>{q}</span>
+              </div>
+            );
+          })}
+        </div>
+      );
+    };
+
+    // Main App
+    function App() {
+      const [currentStep, setCurrentStep] = useState(0);
+      const [showGuide, setShowGuide] = useState(null);
+      
+      const [data, setData] = useState({
+        identidade: '',
+        quemEuSou: '',
+        marcos: [
+          { trimestre: 'Q1', identidade: '', evidencia: '', completo: false },
+          { trimestre: 'Q2', identidade: '', evidencia: '', completo: false },
+          { trimestre: 'Q3', identidade: '', evidencia: '', completo: false },
+          { trimestre: 'Q4', identidade: '', evidencia: '', completo: false },
+        ],
+        acoesSemanais: [
+          { texto: 'Definir identidade-alvo usando IA', completo: false },
+          { texto: 'Escrever 4 marcos de identidade trimestrais', completo: false },
+          { texto: 'Agendar 30min mensal para recalibração', completo: false },
+        ],
+        acoesMensais: [
+          { texto: 'Criar documento de Gatilhos de Realidade', completo: false },
+          { texto: 'Configurar lembrete trimestral de revisão', completo: false },
+          { texto: 'Identificar UMA coisa que estou evitando', completo: false },
+        ],
+        gatilhos: [
+          { pergunta: 'Se um estranho observasse meus últimos 90 dias, o que ele diria que é minha real prioridade?', resposta: '' },
+          { pergunta: 'O que eu estou fingindo não saber?', resposta: '' },
+          { pergunta: 'Se eu continuasse exatamente como estou, onde estarei em dezembro de 2026?', resposta: '' },
+          { pergunta: 'O que a versão de mim que já chegou onde quero ir faria diferente HOJE?', resposta: '' },
+        ],
+        ultimaRecalibracao: null,
+      });
+
+      const steps = [
+        { id: 0, nome: 'Identidade', emoji: '🧭', desc: 'Quem você quer se tornar' },
+        { id: 1, nome: 'Marcos', emoji: '🎯', desc: 'Evidências trimestrais' },
+        { id: 2, nome: 'Ações', emoji: '⚡', desc: 'Próximos passos concretos' },
+        { id: 3, nome: 'Gatilhos', emoji: '🪞', desc: 'Perguntas de realidade' },
+        { id: 4, nome: 'Exportar', emoji: '📄', desc: 'Baixe seu plano' },
+      ];
+
+      const sugestoesMarcosIA = [
+        { identidade: "Sou alguém que experimenta sem medo de errar", evidencia: "Lancei pelo menos 2 projetos/ideias mesmo imperfeitos", tema: "🌱 Fundação" },
+        { identidade: "Sou alguém que cria sistemas, não só resultados", evidencia: "Automatizei 3 tarefas repetitivas e documentei meu método", tema: "🔧 Construção" },
+        { identidade: "Sou alguém que atrai oportunidades por competência visível", evidencia: "Recebi 2 convites/propostas não-solicitados", tema: "🚀 Expansão" },
+        { identidade: "Sou alguém que constrói legado, não só resultados", evidencia: "Ensinei meu método para outras pessoas", tema: "♾️ Legado" }
+      ];
+
+      const aplicarSugestoes = useCallback(() => {
+        setData(prev => ({
+          ...prev,
+          marcos: prev.marcos.map((m, i) => ({
+            ...m,
+            identidade: m.identidade || sugestoesMarcosIA[i].identidade,
+            evidencia: m.evidencia || sugestoesMarcosIA[i].evidencia,
+          }))
+        }));
+      }, []);
+
+      const progresso = useMemo(() => {
+        let total = 0, completos = 0;
+        total += 10;
+        if (data.identidade.length > 20) completos += 10;
+        data.marcos.forEach(m => {
+          total += 10;
+          if (m.identidade.length > 10 && m.evidencia.length > 10) completos += 5;
+          if (m.completo) completos += 5;
+        });
+        data.acoesSemanais.forEach(() => { total += 5; });
+        data.acoesSemanais.forEach(a => { if (a.completo) completos += 5; });
+        data.acoesMensais.forEach(() => { total += 5; });
+        data.acoesMensais.forEach(a => { if (a.completo) completos += 5; });
+        data.gatilhos.forEach(() => { total += 5; });
+        data.gatilhos.forEach(g => { if (g.resposta.length > 20) completos += 5; });
+        return Math.min(100, Math.round((completos / total) * 100));
+      }, [data]);
+
+      const handleIdentidadeChange = useCallback((e) => setData(prev => ({ ...prev, identidade: e.target.value })), []);
+      const handleQuemEuSouChange = useCallback((e) => setData(prev => ({ ...prev, quemEuSou: e.target.value })), []);
+      const handleMarcoIdentidadeChange = useCallback((i, v) => setData(prev => ({ ...prev, marcos: prev.marcos.map((m, idx) => idx === i ? { ...m, identidade: v } : m) })), []);
+      const handleMarcoEvidenciaChange = useCallback((i, v) => setData(prev => ({ ...prev, marcos: prev.marcos.map((m, idx) => idx === i ? { ...m, evidencia: v } : m) })), []);
+      const handleMarcoCompletoToggle = useCallback((i) => setData(prev => ({ ...prev, marcos: prev.marcos.map((m, idx) => idx === i ? { ...m, completo: !m.completo } : m) })), []);
+      const handleAcaoToggle = useCallback((tipo, i) => setData(prev => ({ ...prev, [tipo]: prev[tipo].map((a, idx) => idx === i ? { ...a, completo: !a.completo } : a) })), []);
+      const handleGatilhoChange = useCallback((i, v) => setData(prev => ({ ...prev, gatilhos: prev.gatilhos.map((g, idx) => idx === i ? { ...g, resposta: v } : g) })), []);
+      const handleRecalibracao = useCallback(() => setData(prev => ({ ...prev, ultimaRecalibracao: new Date().toISOString() })), []);
+
+      const promptIdentidade = useMemo(() => {
+        const quemSou = data.quemEuSou || '[descreva quem você é hoje]';
+        return `Vou te descrever quem eu sou hoje: ${quemSou}\n\nMe ajude a definir quem eu preciso me tornar para que meus objetivos sejam consequência natural do meu comportamento diário.\n\nNão me dê metas — me dê traços de identidade e hábitos nucleares.`;
+      }, [data.quemEuSou]);
+
+      const promptMarcos = useMemo(() => {
+        const identidade = data.identidade || '[sua identidade-alvo]';
+        return `Minha identidade-alvo para dezembro de 2026 é:\n\n"${identidade}"\n\nPreciso decompor isso em 4 marcos trimestrais PROGRESSIVOS. Cada marco deve:\n1. Ser uma declaração de IDENTIDADE ("Sou alguém que...")\n2. Ter uma EVIDÊNCIA OBSERVÁVEL concreta\n3. Construir sobre o anterior (escadinha de evolução)\n\nConsidere que tenho TDAH, então cada passo precisa ser pequeno o suficiente para não parecer overwhelming.`;
+      }, [data.identidade]);
+
+      const promptGatilhos = useMemo(() => {
+        const respostas = data.gatilhos.map((g, i) => `${i + 1}. ${g.pergunta}\nMinha resposta: ${g.resposta || '[ainda não respondido]'}`).join('\n\n');
+        return `Analise minhas respostas aos Gatilhos de Realidade:\n\n${respostas}\n\nSeja brutalmente honesto: onde você vê desalinhamento entre o que eu digo que quero e o que eu realmente faço?`;
+      }, [data.gatilhos]);
+
+      const generateMarkdown = useCallback(() => {
+        const dataAtual = new Date().toLocaleDateString('pt-BR');
+        return `# 🧠 Plano Anti-Frágil 2026\n\n**Data:** ${dataAtual} | **Progresso:** ${progresso}%\n\n---\n\n## 🧭 Identidade\n\n**Quem eu sou hoje:**\n${data.quemEuSou || '*Não preenchido*'}\n\n**Quem eu quero me tornar:**\n${data.identidade || '*Não preenchido*'}\n\n---\n\n## 🎯 Marcos Trimestrais\n\n${data.marcos.map(m => `### ${m.trimestre} ${m.completo ? '✅' : '⬜'}\n**Identidade:** ${m.identidade || '*Não definido*'}\n**Evidência:** ${m.evidencia || '*Não definida*'}`).join('\n\n')}\n\n---\n\n## ⚡ Ações\n\n**Esta Semana:**\n${data.acoesSemanais.map(a => `- [${a.completo ? 'x' : ' '}] ${a.texto}`).join('\n')}\n\n**Este Mês:**\n${data.acoesMensais.map(a => `- [${a.completo ? 'x' : ' '}] ${a.texto}`).join('\n')}\n\n---\n\n## 🪞 Gatilhos de Realidade\n\n${data.gatilhos.map((g, i) => `**${i + 1}. ${g.pergunta}**\n${g.resposta || '*Não respondido*'}`).join('\n\n')}\n\n---\n\n*Gerado com ∞ Academia Lendár[IA]*`;
+      }, [data, progresso]);
+
+      const downloadFile = useCallback((content, filename, mimeType) => {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, []);
+
+      const exportMarkdown = () => downloadFile(generateMarkdown(), 'plano-antifragil-2026.md', 'text/markdown');
+
+      const perguntasGuia = [
+        { tema: "🌱 Fundação", pergunta: "Qual é a MENOR mudança que criaria a base para todo o resto?" },
+        { tema: "🔧 Construção", pergunta: "O que eu poderia SISTEMATIZAR para multiplicar meu esforço?" },
+        { tema: "🚀 Expansão", pergunta: "Como minha competência pode se tornar VISÍVEL para outros?" },
+        { tema: "♾️ Legado", pergunta: "Como posso transformar o que aprendi em algo que MULTIPLICA?" },
+      ];
+
+      const renderStep = () => {
+        switch (currentStep) {
+          case 0:
+            return (
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-2xl p-5 border-l-4 border-black">
+                  <p className="text-gray-600 text-sm mb-1">💡 Dica TDAH</p>
+                  <p className="text-gray-800">Não pense em metas. Pense: <strong>"Que tipo de pessoa naturalmente alcança o que eu quero?"</strong></p>
+                </div>
+                <div className="space-y-4">
+                  <label className="block">
+                    <span className="text-gray-500 text-sm uppercase tracking-wide">Quem você é hoje</span>
+                    <textarea value={data.quemEuSou} onChange={handleQuemEuSouChange}
+                      placeholder="Ex: Sou alguém que começa muitas coisas e termina poucas..."
+                      className="mt-2 w-full p-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none resize-none h-28 text-gray-800" />
+                  </label>
+                  <label className="block">
+                    <span className="text-gray-500 text-sm uppercase tracking-wide">Quem você quer se tornar em 2026</span>
+                    <textarea value={data.identidade} onChange={handleIdentidadeChange}
+                      placeholder="Ex: Sou alguém que entrega consistentemente, mesmo imperfeito..."
+                      className="mt-2 w-full p-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none resize-none h-28 text-gray-800" />
+                  </label>
+                </div>
+                {data.identidade.length > 20 && (
+                  <div className="bg-black text-white p-4 rounded-xl">
+                    <p className="text-sm opacity-70">✨ Sua bússola para 2026:</p>
+                    <p className="mt-1 font-medium">{data.identidade}</p>
+                  </div>
+                )}
+                <CopyablePrompt label="🤖 Prompt pronto para IA:" prompt={promptIdentidade} />
+              </div>
+            );
+
+          case 1:
+            return (
+              <div className="space-y-6">
+                <StaircaseProgress marcos={data.marcos} />
+                <div className="bg-gray-50 rounded-2xl p-5 border-l-4 border-black">
+                  <p className="text-gray-600 text-sm mb-1">💡 Dica TDAH</p>
+                  <p className="text-gray-800">Pense em <strong>escadinha</strong>: cada trimestre constrói sobre o anterior.</p>
+                </div>
+                {data.identidade.length > 20 && (
+                  <div className="bg-black text-white p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">✨ Sugestões disponíveis</p>
+                      <p className="text-sm opacity-70">Baseadas na sua identidade</p>
+                    </div>
+                    <button onClick={aplicarSugestoes} className="px-4 py-2 bg-white text-black rounded-lg text-sm font-medium hover:bg-gray-100">
+                      Aplicar
+                    </button>
+                  </div>
+                )}
+                <div className="space-y-4">
+                  {data.marcos.map((marco, index) => (
+                    <div key={marco.trimestre}
+                      className={`p-5 rounded-xl border-2 transition-all ${marco.completo ? 'bg-black text-white border-black' : 'bg-white border-gray-200'}`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <span className={`text-2xl font-bold ${marco.completo ? 'text-white' : 'text-gray-300'}`}>{marco.trimestre}</span>
+                          <div>
+                            <span className={`text-sm ${marco.completo ? 'text-gray-300' : 'text-gray-500'}`}>
+                              {['Jan-Mar', 'Abr-Jun', 'Jul-Set', 'Out-Dez'][index]}
+                            </span>
+                            <p className={`text-xs ${marco.completo ? 'text-gray-400' : 'text-gray-400'}`}>{perguntasGuia[index].tema}</p>
+                          </div>
+                        </div>
+                        <button onClick={() => handleMarcoCompletoToggle(index)}
+                          className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${marco.completo ? 'bg-white border-white text-black' : 'border-gray-300 hover:border-black'}`}>
+                          {marco.completo && '✓'}
+                        </button>
+                      </div>
+                      <button onClick={() => setShowGuide(showGuide === index ? null : index)}
+                        className={`w-full text-left text-xs mb-3 p-2 rounded-lg ${marco.completo ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
+                        💭 {showGuide === index ? 'Esconder' : 'Ver'} pergunta guia
+                      </button>
+                      {showGuide === index && (
+                        <div className={`text-sm p-3 rounded-lg mb-3 ${marco.completo ? 'bg-gray-800 text-gray-300' : 'bg-yellow-50 text-yellow-800 border border-yellow-200'}`}>
+                          <p className="font-medium mb-1">Pergunta guia:</p>
+                          <p className="italic">{perguntasGuia[index].pergunta}</p>
+                        </div>
+                      )}
+                      <div className="mb-3">
+                        <label className={`text-xs uppercase tracking-wide ${marco.completo ? 'text-gray-400' : 'text-gray-500'}`}>Identidade</label>
+                        <input type="text" value={marco.identidade} onChange={(e) => handleMarcoIdentidadeChange(index, e.target.value)}
+                          placeholder={sugestoesMarcosIA[index].identidade}
+                          className={`mt-1 w-full p-3 rounded-lg ${marco.completo ? 'bg-gray-800 text-white placeholder-gray-500 border-0' : 'bg-gray-50 border border-gray-200 focus:border-black focus:outline-none'}`} />
+                      </div>
+                      <div>
+                        <label className={`text-xs uppercase tracking-wide ${marco.completo ? 'text-gray-400' : 'text-gray-500'}`}>Evidência</label>
+                        <input type="text" value={marco.evidencia} onChange={(e) => handleMarcoEvidenciaChange(index, e.target.value)}
+                          placeholder={sugestoesMarcosIA[index].evidencia}
+                          className={`mt-1 w-full p-3 rounded-lg ${marco.completo ? 'bg-gray-800 text-white placeholder-gray-500 border-0' : 'bg-gray-50 border border-gray-200 focus:border-black focus:outline-none'}`} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <CopyablePrompt label="🤖 Ou peça para a IA gerar marcos:" prompt={promptMarcos} />
+              </div>
+            );
+
+          case 2:
+            return (
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-2xl p-5 border-l-4 border-black">
+                  <p className="text-gray-600 text-sm mb-1">💡 Dica TDAH</p>
+                  <p className="text-gray-800">Foque em <strong>uma coisa de cada vez</strong>. Marcar libera dopamina!</p>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-lg">⚡ Esta Semana</h3>
+                    <span className="text-sm text-gray-500">{data.acoesSemanais.filter(a => a.completo).length}/{data.acoesSemanais.length}</span>
+                  </div>
+                  <div className="space-y-2">
+                    {data.acoesSemanais.map((acao, index) => (
+                      <button key={`s-${index}`} onClick={() => handleAcaoToggle('acoesSemanais', index)}
+                        className={`w-full p-4 rounded-xl border-2 text-left flex items-center gap-4 ${acao.completo ? 'bg-black text-white border-black' : 'bg-white border-gray-200 hover:border-black'}`}>
+                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${acao.completo ? 'bg-white border-white text-black' : 'border-gray-300'}`}>
+                          {acao.completo && '✓'}
+                        </div>
+                        <span className={acao.completo ? 'line-through opacity-70' : ''}>{acao.texto}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-lg">📅 Este Mês</h3>
+                    <span className="text-sm text-gray-500">{data.acoesMensais.filter(a => a.completo).length}/{data.acoesMensais.length}</span>
+                  </div>
+                  <div className="space-y-2">
+                    {data.acoesMensais.map((acao, index) => (
+                      <button key={`m-${index}`} onClick={() => handleAcaoToggle('acoesMensais', index)}
+                        className={`w-full p-4 rounded-xl border-2 text-left flex items-center gap-4 ${acao.completo ? 'bg-black text-white border-black' : 'bg-white border-gray-200 hover:border-black'}`}>
+                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${acao.completo ? 'bg-white border-white text-black' : 'border-gray-300'}`}>
+                          {acao.completo && '✓'}
+                        </div>
+                        <span className={acao.completo ? 'line-through opacity-70' : ''}>{acao.texto}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+
+          case 3:
+            return (
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-2xl p-5 border-l-4 border-black">
+                  <p className="text-gray-600 text-sm mb-1">💡 Dica TDAH</p>
+                  <p className="text-gray-800">Perguntas <strong>desconfortáveis de propósito</strong>. Revise a cada 90 dias.</p>
+                </div>
+                <div className="space-y-5">
+                  {data.gatilhos.map((g, i) => (
+                    <label key={`g-${i}`} className="block">
+                      <span className="text-gray-700 font-medium flex items-start gap-2">
+                        <span className="text-gray-400">{i + 1}.</span>{g.pergunta}
+                      </span>
+                      <textarea value={g.resposta} onChange={(e) => handleGatilhoChange(i, e.target.value)}
+                        placeholder="Seja brutalmente honesto..."
+                        className="mt-2 w-full p-4 border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none resize-none h-20 text-gray-800" />
+                    </label>
+                  ))}
+                </div>
+                <CopyablePrompt label="🤖 Prompt de confrontação:" prompt={promptGatilhos} />
+                <button onClick={handleRecalibracao} className="w-full p-4 bg-black text-white rounded-xl font-medium hover:bg-gray-800">
+                  ✓ Marcar Recalibração Completa
+                </button>
+                {data.ultimaRecalibracao && (
+                  <p className="text-center text-sm text-gray-500">
+                    Última: {new Date(data.ultimaRecalibracao).toLocaleDateString('pt-BR')}
+                  </p>
+                )}
+              </div>
+            );
+
+          case 4:
+            return (
+              <div className="space-y-6">
+                <div className="bg-black text-white p-5 rounded-2xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-bold text-lg">Progresso</h3>
+                    <ProgressRing progress={progresso} size={56} strokeWidth={3} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div><p className="text-gray-400">Identidade</p><p>{data.identidade ? '✅' : '⬜'}</p></div>
+                    <div><p className="text-gray-400">Marcos</p><p>{data.marcos.filter(m => m.completo).length}/4</p></div>
+                    <div><p className="text-gray-400">Ações</p><p>{data.acoesSemanais.filter(a => a.completo).length + data.acoesMensais.filter(a => a.completo).length}/6</p></div>
+                    <div><p className="text-gray-400">Gatilhos</p><p>{data.gatilhos.filter(g => g.resposta.length > 20).length}/4</p></div>
+                  </div>
+                </div>
+                <button onClick={exportMarkdown} className="w-full p-5 rounded-xl border-2 border-gray-200 hover:border-black flex items-center gap-4 text-left">
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-2xl">📝</div>
+                  <div><p className="font-bold">Baixar Markdown</p><p className="text-sm text-gray-500">Para Notion, Obsidian, etc</p></div>
+                </button>
+                <div className="bg-gray-50 p-4 rounded-xl">
+                  <p className="text-sm text-gray-600">💡 Para PDF: copie o Markdown e cole no <a href="https://markdowntohtml.com" target="_blank" className="underline">markdowntohtml.com</a>, depois Ctrl+P</p>
+                </div>
+                <div className="border-t pt-4">
+                  <h3 className="font-bold mb-3">Prévia:</h3>
+                  <div className="bg-gray-50 rounded-xl p-4 max-h-40 overflow-y-auto">
+                    <pre className="text-xs text-gray-700 whitespace-pre-wrap font-mono">{generateMarkdown().substring(0, 800)}...</pre>
+                  </div>
+                </div>
+              </div>
+            );
+
+          default: return null;
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-white">
+          <header className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-40">
+            <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <LogoDiamante size={28} color="#000" />
+                <div>
+                  <h1 className="font-bold text-base">Plano Anti-Frágil</h1>
+                  <p className="text-xs text-gray-500">2026 • TDAH-Friendly</p>
+                </div>
+              </div>
+              <ProgressRing progress={progresso} size={48} strokeWidth={3} />
+            </div>
+          </header>
+
+          <nav className="sticky top-[57px] bg-white border-b border-gray-100 z-30 overflow-x-auto">
+            <div className="max-w-2xl mx-auto px-4 flex gap-1 py-2">
+              {steps.map((step, i) => (
+                <button key={step.id} onClick={() => setCurrentStep(i)}
+                  className={`flex-1 min-w-0 px-2 py-2 rounded-lg transition-all ${currentStep === i ? 'bg-black text-white' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'}`}>
+                  <span className="text-base block">{step.emoji}</span>
+                  <span className="text-[10px] font-medium block truncate">{step.nome}</span>
+                </button>
+              ))}
+            </div>
+          </nav>
+
+          <div className="max-w-2xl mx-auto px-4 pt-6 text-center mb-6">
+            <h2 className="text-xl font-bold">{steps[currentStep].emoji} {steps[currentStep].nome}</h2>
+            <p className="text-gray-500 text-sm mt-1">{steps[currentStep].desc}</p>
+          </div>
+
+          <main className="max-w-2xl mx-auto px-4 pb-28">{renderStep()}</main>
+
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3">
+            <div className="max-w-2xl mx-auto flex gap-3">
+              <button onClick={() => setCurrentStep(p => Math.max(0, p - 1))} disabled={currentStep === 0}
+                className={`flex-1 py-3 rounded-xl font-medium ${currentStep === 0 ? 'bg-gray-100 text-gray-400' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                ← Anterior
+              </button>
+              <button onClick={() => setCurrentStep(p => Math.min(4, p + 1))} disabled={currentStep === 4}
+                className={`flex-1 py-3 rounded-xl font-medium ${currentStep === 4 ? 'bg-gray-400 text-white' : 'bg-black text-white hover:bg-gray-800'}`}>
+                {currentStep === 3 ? 'Exportar →' : 'Próximo →'}
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
