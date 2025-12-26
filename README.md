@@ -1,0 +1,1 @@
+# plano-antifragil-2026
